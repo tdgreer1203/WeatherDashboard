@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Dashboard</title>
+  </head>
+  <body>
+    <header>
+      <nav class="cyan">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center"><i id="header-icon" class="material-icons">cloud</i> Weather Dashboard</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="row">
+        <div id="search-area" class="col s12 m3 center grey lighten-3">
+          <div class="row">
+            <h2 class="flow-text">Search for a City:</h2>
+          </div>
+          <div class="row">
+            <div class="input-field">
+                <input id="city-input" type="text" class="validate">
+                <label for="city-input">Enter City</label>
+                <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Search
+                    <i class="material-icons right">public</i>
+                </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="divider black"></div>
+          </div>
+          <div class="row" id="previous-searches">
+          </div>
+        </div>
+        <div class="col s12 m9" id="content-area">
+          <div class="row" id="current-info">
+            <h2 id="city-title">City Name (Date)</h2>
+          </div>
+          <div class="row section cyan lighten-3" id="five-day-area">
+            <h4>5-Day Forecast:</h4>
+          </div>
+        </div>  
+      </div>    
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

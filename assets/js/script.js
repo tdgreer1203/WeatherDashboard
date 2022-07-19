@@ -1,0 +1,1 @@
+//Previous searches button classes: btn waves-effect waves-light blue
