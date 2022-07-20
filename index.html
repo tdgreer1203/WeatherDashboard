@@ -13,7 +13,7 @@
     <header>
       <nav class="cyan">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo center"><i id="header-icon" class="material-icons">cloud</i> Weather Dashboard</a>
+          <a href="#" class="brand-logo center flow-text"><i id="header-icon" class="material-icons">cloud</i> Weather Dashboard</a>
         </div>
       </nav>
     </header>
@@ -27,7 +27,7 @@
             <div class="input-field">
                 <input id="city-input" type="text" class="validate">
                 <label for="city-input">Enter City</label>
-                <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Search
+                <button id="search-button" class="btn waves-effect waves-light btn-large hoverable" type="submit" name="action">Search
                     <i class="material-icons right">public</i>
                 </button>
             </div>
@@ -46,9 +46,19 @@
             <h4>5-Day Forecast:</h4>
           </div>
         </div>  
-      </div>    
+      </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
+  <div id="error-modal" class="modal">
+    <div class="modal-content">
+      <h4 class="flow-text">Error Message</h4>
+      <p id="modal-message"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Got It!</a>
+    </div>
+  </div>
 </html>
