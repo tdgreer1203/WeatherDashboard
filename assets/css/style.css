@@ -1,0 +1,29 @@
+#search-area {
+    height: 100vh;
+}
+
+#current-info {
+    padding-left: 40px;
+}
+
+#five-day-area {
+    padding-left: 40px;
+}
+
+.input-field {
+    padding: 0 15px;
+}
+
+label {
+    padding: 0 15px;
+}
+
+.btn {
+    width: 80%;
+}
+
+@media only screen and (max-width: 600px) {
+    #search-area {
+      height: auto;
+    }
+  }
