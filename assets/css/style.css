@@ -23,6 +23,10 @@ label {
     margin-top: 10px;
 }
 
+.row {
+    margin: 0;
+}
+
 @media only screen and (max-width: 600px) {
     #search-area {
       height: auto;
