@@ -1,29 +1,3 @@
-//Previous searches button classes: btn waves-effect waves-light blue
-//https://api.openweathermap.org/data/2.5/weather?q=Dallas&appid=011fc9a6ee8731e0d02abfa9e7a65489
-/*
-temp = data.main.temp;
-            wind = data.wind.speed;
-            humidity = data.main.humidity;
-            var iconUrl = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
-
-            var humidity = "";
-var temp = "";
-var wind = "";
-var unIndex = "";
-var iconUrl = "";
-var lon = "";
-var lat = "";
-var apiUrl = "";
-
-iconUrl = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png";
-                    tempEl.val(data.current.temp);
-                    console.log(data.current.temp);
-                    windEl.val(data.current.wind_speed);
-                    humidityEl.val(data.current.humidity);
-                    uvindexEl.val(data.current.uvi);
-*/
-//data.main.temp
-
 $(document).ready(function(){
     var apiKey = "&appid=011fc9a6ee8731e0d02abfa9e7a65489"; 
     var apiUrl = "";
@@ -37,12 +11,14 @@ $(document).ready(function(){
     var uvindexEl = $('#current-uvindex');
     var iconEl = $('#city-title-icon');
     var iconUrl = "";
+    var icon;
     var temp;
     var humidity;
     var wind;
     var uvi;
     var city;
     var date = new Date().toLocaleDateString('en-US');
+    var fiveDayForecast = [];
 
     $('.modal').modal();
     
@@ -71,9 +47,13 @@ $(document).ready(function(){
                     humidity = data.current.humidity;
                     wind = data.current.wind_speed;
                     uvi = data.current.uvi;
-                    iconUrl = data.current.weather[0].icon;
+                    icon = data.current.weather[0].icon;
+                    for(var i = 0; i < 5; i++) {
+                        fiveDayForecast.push(data.daily[i]);
+                    }
                 }).then(function() {
                     populateCurrentScreen();
+                    populateFiveDayScreen();
                 });
             } else {
                 showModal("There was a problem with the request. Please try again. Error Code: " + response.status);
@@ -83,10 +63,11 @@ $(document).ready(function(){
     }
 
     function populateCurrentScreen() {
+        iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
         var img = $('<img>');
-        img.attr('src', "http://openweathermap.org/img/wn/" + iconUrl + ".png");
-        img.append(iconEl);
+        img.attr('src', iconUrl);
         cityTitleEl.text(city + " " + date);
+        cityTitleEl.append(img);
         tempEl.text(temp + "\u00B0F");
         windEl.text(wind + " MPH");
         humidityEl.text(humidity + "%");
