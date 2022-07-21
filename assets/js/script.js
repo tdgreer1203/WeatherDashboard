@@ -66,7 +66,7 @@ $(document).ready(function(){
         iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
         var img = $('<img>');
         img.attr('src', iconUrl);
-        cityTitleEl.text(city + " " + date);
+        cityTitleEl.text(city + "  (" + date + ")  ");
         cityTitleEl.append(img);
         tempEl.text(temp + "\u00B0F");
         windEl.text(wind + " MPH");

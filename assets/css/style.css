@@ -27,6 +27,18 @@ label {
     margin: 0;
 }
 
+#current-uvindex {
+    padding: 5px;
+}
+ 
+p {
+    font-size: 18px;
+}
+
+#city-title-icon {
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 600px) {
     #search-area {
       height: auto;
