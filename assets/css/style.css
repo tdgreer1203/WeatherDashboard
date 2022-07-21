@@ -2,7 +2,7 @@
     height: 100vh;
 }
 
-#current-info {
+.current-info {
     padding-left: 40px;
 }
 
