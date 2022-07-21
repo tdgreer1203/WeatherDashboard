@@ -2,12 +2,12 @@
     height: 100vh;
 }
 
-.current-info {
-    padding-left: 40px;
+#current-info {
+    padding-left: 50px;
 }
 
 #five-day-area {
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .input-field {
