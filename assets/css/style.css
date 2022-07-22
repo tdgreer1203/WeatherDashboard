@@ -1,0 +1,56 @@
+#search-area {
+    height: 100vh;
+}
+
+#current-info {
+    padding-left: 50px;
+}
+
+#five-day-area {
+    padding-left: 50px;
+}
+
+.input-field {
+    padding: 0 15px;
+}
+
+label {
+    padding: 0 15px;
+}
+
+.btn {
+    width: 80%;
+    margin-top: 10px;
+}
+
+.row {
+    margin: 0;
+}
+
+#current-uvindex {
+    padding: 5px;
+}
+ 
+p {
+    font-size: 18px;
+}
+
+#city-title-icon {
+    margin-top: 10px;
+}
+
+.forecast {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#previous-searches {
+    padding-top: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    #search-area {
+      height: auto;
+    }
+  }
+
