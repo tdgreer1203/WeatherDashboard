@@ -2,7 +2,7 @@ $(document).ready(function(){
     const apiKey = "&appid=011fc9a6ee8731e0d02abfa9e7a65489"; 
 
     var inputEl = $('#city-input');
-    var buttonEl = $('#search-button');  
+    var searchBtnEl = $('#search-button');  
     var modalMessage = $('#modal-message');
     var cityTitleEl = $('#city-title');
     var tempEl = $('#current-temp');
@@ -28,6 +28,7 @@ $(document).ready(function(){
     
     function generateUrl(city) {
         apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&exclude=minutely,hourly,daily,alerts" + apiKey;
+        console.log(apiUrl);
         let response = fetch(apiUrl).then(function(response){
             if(response.ok) {
                 response.json().then(function(data) {
@@ -76,12 +77,9 @@ $(document).ready(function(){
         windEl.text(wind + " MPH");
         humidityEl.text(humidity + "%");
         uvindexEl.text(uvi);
-
-        addToHistory();
     }
     
     function populateFiveDayScreen() {
-        clearForecast();
         date = new Date();
         for(var i = 0; i < 5; i++) {
             icon = fiveDayForecast[i].weather[0].icon;
@@ -109,17 +107,13 @@ $(document).ready(function(){
 
         fiveDayForecast = [];
         date = new Date().toLocaleDateString('en-US');
-        saveSearch();
     }
 
     function addToHistory() {
-        var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
-        previousSearchesEl.append(prevBtn);
-    }
-
-    function saveSearch() {
         searchHistory.push(city);
         localStorage.setItem("searches", JSON.stringify(searchHistory));
+        var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
+        previousSearchesEl.append(prevBtn);
     }
 
     function populateSearches() {
@@ -135,6 +129,9 @@ $(document).ready(function(){
             searchHistory = [];
         } else {
             searchHistory = JSON.parse(savedSearches);
+            city = searchHistory[0];
+            console.log(city);
+            generateUrl(city);
         }
         populateSearches();
     }
@@ -146,19 +143,39 @@ $(document).ready(function(){
             myModal.open();
     }
 
-    function clearForecast() {
+    function resetValues() {
+        temp = "";
+        apiUrl = "";
+        iconUrl = "";
+        icon = "";
+        humidity = "";
+        wind = "";
+        uvi = "";
+        city = "";
+        date = new Date().toLocaleDateString('en-US');
+        fiveDayForecast = [];
         fiveDayForecastEl.empty();
+        inputEl.val("");
     }
 
-    buttonEl.click(function() {
+    searchBtnEl.click(function() {
         city = inputEl.val().trim();
         if(city) {
-            clearForecast();
             generateUrl(city);
+            addToHistory();
+            saveSearch();
+            resetValues();
         } else {
             showModal("Oh no! It looks like you forgot to enter a city. Please enter a city.");
+            return;
         }
     });   
+
+    previousSearchesEl.click(function(event) {
+        resetValues();
+        city = event.target.textContent;
+        generateUrl(city);
+    });
 
     loadSearches();
 });
