@@ -35,11 +35,14 @@
           <div class="row">
             <div class="divider black"></div>
           </div>
+          <div class="row" id="previous-searches">
+            <!--Loaded From JS-->
+          </div>
           <div class="row" id="previous-searches"></div>
         </div>
         <div class="col s12 m9" id="content-area">
           <div class="row current-info" id="current-info">
-            <h2 id="city-title" class="flow-text valign-wrapper">City</h2><span id="city-title-icon"></span>
+            <h2 id="city-title" class="flow-text valign-wrapper">City</h2>
             <p>Temp: <strong id="current-temp"></strong></p>
             <p>Wind: <strong id="current-wind"></strong></p>
             <p>Humidity: <strong id="current-humidity"></strong></p>
@@ -49,7 +52,10 @@
             <div class="divider black"></div>
           </div>
           <div class="row section cyan lighten-3" id="five-day-area">
-            <h4>5-Day Forecast:</h4>
+            <h4 class="flow-text">5-Day Forecast:</h4>
+            <div class="row" id="five-day-forecast">
+              <!--Populated in JS-->
+            </div>
           </div>
         </div>  
       </div>

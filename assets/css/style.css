@@ -39,6 +39,15 @@ p {
     margin-top: 10px;
 }
 
+.forecast {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#previous-searches {
+    padding-top: 15px;
+}
+
 @media only screen and (max-width: 600px) {
     #search-area {
       height: auto;
