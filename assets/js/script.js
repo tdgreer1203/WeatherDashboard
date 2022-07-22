@@ -81,8 +81,9 @@ $(document).ready(function(){
     }
     
     function populateFiveDayScreen() {
+        clearForecast();
         date = new Date();
-        for(var i = 0; i < fiveDayForecast.length; i++) {
+        for(var i = 0; i < 5; i++) {
             icon = fiveDayForecast[i].weather[0].icon;
             temp = fiveDayForecast[i].temp.day;
             wind = fiveDayForecast[i].wind_speed;
@@ -106,6 +107,8 @@ $(document).ready(function(){
             fiveDayForecastEl.append(divColumn);
         }
 
+        fiveDayForecast = [];
+        date = new Date().toLocaleDateString('en-US');
         saveSearch();
     }
 
