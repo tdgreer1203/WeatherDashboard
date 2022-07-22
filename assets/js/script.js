@@ -105,8 +105,7 @@ $(document).ready(function(){
             fiveDayForecastEl.append(divColumn);
         }
 
-        fiveDayForecast = [];
-        date = new Date().toLocaleDateString('en-US');
+        resetValues();
     }
 
     function addToHistory() {
