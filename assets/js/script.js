@@ -28,7 +28,6 @@ $(document).ready(function(){
     
     function generateUrl(city) {
         apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&exclude=minutely,hourly,daily,alerts" + apiKey;
-        console.log(apiUrl);
         let response = fetch(apiUrl).then(function(response){
             if(response.ok) {
                 response.json().then(function(data) {
@@ -53,6 +52,7 @@ $(document).ready(function(){
                     wind = data.current.wind_speed;
                     uvi = data.current.uvi;
                     icon = data.current.weather[0].icon;
+                    fiveDayForecast = [];
                     for(var i = 0; i < 5; i++) {
                         fiveDayForecast.push(data.daily[i]);
                     }
@@ -104,8 +104,6 @@ $(document).ready(function(){
 
             fiveDayForecastEl.append(divColumn);
         }
-
-        resetValues();
     }
 
     function addToHistory() {
@@ -129,7 +127,6 @@ $(document).ready(function(){
         } else {
             searchHistory = JSON.parse(savedSearches);
             city = searchHistory[0];
-            console.log(city);
             generateUrl(city);
         }
         populateSearches();
@@ -160,10 +157,10 @@ $(document).ready(function(){
     searchBtnEl.click(function() {
         city = inputEl.val().trim();
         if(city) {
+            resetValues();
             generateUrl(city);
             addToHistory();
-            saveSearch();
-            resetValues();
+            populateSearches();
         } else {
             showModal("Oh no! It looks like you forgot to enter a city. Please enter a city.");
             return;
