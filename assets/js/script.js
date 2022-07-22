@@ -37,6 +37,7 @@ $(document).ready(function(){
                 });
             } else {
                 showModal("There was a problem with the request. Please try again. Error Code: " + response.status);
+                return;
             }
         });
         inputEl.val("");
@@ -108,6 +109,7 @@ $(document).ready(function(){
 
     function addToHistory() {
         searchHistory.push(city);
+        console.log(searchHistory);
         localStorage.setItem("searches", JSON.stringify(searchHistory));
         var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
         previousSearchesEl.append(prevBtn);
@@ -157,7 +159,6 @@ $(document).ready(function(){
     searchBtnEl.click(function() {
         city = inputEl.val().trim();
         if(city) {
-            resetValues();
             generateUrl(city);
             addToHistory();
             populateSearches();
