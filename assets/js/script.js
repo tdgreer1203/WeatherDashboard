@@ -19,8 +19,8 @@ $(document).ready(function(){
     var humidity;
     var wind;
     var uvi;
+    var date;
     var city;
-    var date = new Date().toLocaleDateString('en-US');
     var fiveDayForecast = [];
     var searchHistory = [];
 
@@ -67,6 +67,7 @@ $(document).ready(function(){
     }
 
     function populateCurrentScreen() {
+        date = new Date().toLocaleDateString('en-US');
         iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
         var img = $('<img>');
         img.attr('src', iconUrl);
@@ -76,10 +77,12 @@ $(document).ready(function(){
         windEl.text(wind + " MPH");
         humidityEl.text(humidity + "%");
         uvindexEl.text(uvi);
+        inputEl.val("");
     }
     
     function populateFiveDayScreen() {
         date = new Date();
+        $('#five-day-forecast').empty();
         for(var i = 0; i < 5; i++) {
             icon = fiveDayForecast[i].weather[0].icon;
             temp = fiveDayForecast[i].temp.day;
@@ -150,10 +153,9 @@ $(document).ready(function(){
         wind = "";
         uvi = "";
         city = "";
-        date = new Date().toLocaleDateString('en-US');
         fiveDayForecast = [];
         fiveDayForecastEl.empty();
-        inputEl.val("");
+        
     }
 
     searchBtnEl.click(function() {
@@ -174,7 +176,7 @@ $(document).ready(function(){
     });
 
     loadSearches();
-    if(savedSearches) {
-        generateUrl(savedSearches[0]);
+    if(searchHistory) {
+        generateUrl(searchHistory[0]);
     }
 });
