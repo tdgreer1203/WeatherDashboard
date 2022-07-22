@@ -40,7 +40,6 @@ $(document).ready(function(){
                 return;
             }
         });
-        inputEl.val("");
     }
 
     function setValues(apiUrl) {
@@ -65,7 +64,6 @@ $(document).ready(function(){
                 showModal("There was a problem with the request. Please try again. Error Code: " + response.status);
             }
         });
-        inputEl.val("");
     }
 
     function populateCurrentScreen() {
@@ -108,11 +106,13 @@ $(document).ready(function(){
     }
 
     function addToHistory() {
-        searchHistory.push(city);
-        console.log(searchHistory);
-        localStorage.setItem("searches", JSON.stringify(searchHistory));
-        var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
-        previousSearchesEl.append(prevBtn);
+        if(!searchHistory.includes(city)) {
+            searchHistory.push(city);
+            console.log(searchHistory);
+            localStorage.setItem("searches", JSON.stringify(searchHistory));
+            var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
+            previousSearchesEl.append(prevBtn);
+        }  
     }
 
     function populateSearches() {
@@ -161,7 +161,6 @@ $(document).ready(function(){
         if(city) {
             generateUrl(city);
             addToHistory();
-            populateSearches();
         } else {
             showModal("Oh no! It looks like you forgot to enter a city. Please enter a city.");
             return;
@@ -175,4 +174,7 @@ $(document).ready(function(){
     });
 
     loadSearches();
+    if(savedSearches) {
+        generateUrl(savedSearches[0]);
+    }
 });
