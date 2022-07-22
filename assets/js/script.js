@@ -28,7 +28,6 @@ $(document).ready(function(){
     
     function generateUrl(city) {
         apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&exclude=minutely,hourly,daily,alerts" + apiKey;
-        console.log(apiUrl);
         let response = fetch(apiUrl).then(function(response){
             if(response.ok) {
                 response.json().then(function(data) {
@@ -38,9 +37,9 @@ $(document).ready(function(){
                 });
             } else {
                 showModal("There was a problem with the request. Please try again. Error Code: " + response.status);
+                return;
             }
         });
-        inputEl.val("");
     }
 
     function setValues(apiUrl) {
@@ -53,6 +52,7 @@ $(document).ready(function(){
                     wind = data.current.wind_speed;
                     uvi = data.current.uvi;
                     icon = data.current.weather[0].icon;
+                    fiveDayForecast = [];
                     for(var i = 0; i < 5; i++) {
                         fiveDayForecast.push(data.daily[i]);
                     }
@@ -64,7 +64,6 @@ $(document).ready(function(){
                 showModal("There was a problem with the request. Please try again. Error Code: " + response.status);
             }
         });
-        inputEl.val("");
     }
 
     function populateCurrentScreen() {
@@ -104,16 +103,16 @@ $(document).ready(function(){
 
             fiveDayForecastEl.append(divColumn);
         }
-
-        fiveDayForecast = [];
-        date = new Date().toLocaleDateString('en-US');
     }
 
     function addToHistory() {
-        searchHistory.push(city);
-        localStorage.setItem("searches", JSON.stringify(searchHistory));
-        var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
-        previousSearchesEl.append(prevBtn);
+        if(!searchHistory.includes(city)) {
+            searchHistory.push(city);
+            console.log(searchHistory);
+            localStorage.setItem("searches", JSON.stringify(searchHistory));
+            var prevBtn = $('<a>').addClass("waves-effect waves-light btn white black-text hoverable").text(city);
+            previousSearchesEl.append(prevBtn);
+        }  
     }
 
     function populateSearches() {
@@ -130,7 +129,6 @@ $(document).ready(function(){
         } else {
             searchHistory = JSON.parse(savedSearches);
             city = searchHistory[0];
-            console.log(city);
             generateUrl(city);
         }
         populateSearches();
@@ -163,8 +161,6 @@ $(document).ready(function(){
         if(city) {
             generateUrl(city);
             addToHistory();
-            saveSearch();
-            resetValues();
         } else {
             showModal("Oh no! It looks like you forgot to enter a city. Please enter a city.");
             return;
@@ -178,4 +174,7 @@ $(document).ready(function(){
     });
 
     loadSearches();
+    if(savedSearches) {
+        generateUrl(savedSearches[0]);
+    }
 });
