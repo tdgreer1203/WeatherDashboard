@@ -155,7 +155,7 @@ $(document).ready(function(){
         city = "";
         fiveDayForecast = [];
         fiveDayForecastEl.empty();
-        
+        inputEl.val("");
     }
 
     searchBtnEl.click(function() {
@@ -176,7 +176,4 @@ $(document).ready(function(){
     });
 
     loadSearches();
-    if(searchHistory) {
-        generateUrl(searchHistory[0]);
-    }
 });
