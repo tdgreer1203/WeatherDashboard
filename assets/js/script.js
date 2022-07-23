@@ -172,8 +172,11 @@ $(document).ready(function(){
     previousSearchesEl.click(function(event) {
         resetValues();
         city = event.target.textContent;
-        generateUrl(city);
+        if(city) {
+            generateUrl(city);
+        }
     });
 
     loadSearches();
+
 });
